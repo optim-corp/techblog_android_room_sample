@@ -1,0 +1,2 @@
+rootProject.name='techblog_android_room_sample'
+include ':app'
