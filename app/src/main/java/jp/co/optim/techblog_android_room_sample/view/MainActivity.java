@@ -6,10 +6,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.util.List;
 
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         userDataManager = new UserDataManager(this);
         callback = new UserDataManagerCallback(this);
         userDataManager.setCallback(callback);
+        userDataManager.read();
     }
 
     /**
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_delete_all:
                 //AllDelete処理
+                userDataManager.deleteAll();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -72,6 +77,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickAddUserButton(View view) {
+        EditText editText = findViewById(R.id.editTextUser);
+        String inputName = editText.getText().toString();
+        //入力されたら、文言有無にかかわらず、文言初期化しキーボードを閉じる。
+        editText.setText("");
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        if (inputName.length() != 0) {
+            //db格納用に整形
+            User user = new User();
+            user.setName(inputName);
+            user.setCreatedAt(System.currentTimeMillis());
+            //user追加処理
+            userDataManager.insert(user);
+        }
     }
 
     /**

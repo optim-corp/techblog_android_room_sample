@@ -56,6 +56,31 @@ public class UserDataManager {
 
     public void setCallback(UserDataManagerCallback callback) {
         this.callback = callback;
+        callback.setUserDataManager(this);
+    }
+
+    /**
+     * insert処理
+     *
+     * @param user 追加するUser
+     */
+    public void insert(User user) {
+        asyncExecute(user, INSERT);
+    }
+
+    /**
+     * read処理
+     */
+    public void read() {
+        asyncRead();
+    }
+
+    /**
+     * delete処理
+     * Userテーブルのデータ全てを削除する。
+     */
+    public void deleteAll() {
+        asyncExecute(null, DELETE_ALL);
     }
 
     /**
