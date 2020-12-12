@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">techblog_android_room_sample</string>
+    <string name="hint_addUser">Add User Name</string>
+    <string name="buttonAddUser">Add</string>
 </resources>
