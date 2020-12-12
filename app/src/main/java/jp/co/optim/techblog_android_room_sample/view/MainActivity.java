@@ -1,17 +1,27 @@
-package jp.co.optim.techblog_android_room_sample;
+package jp.co.optim.techblog_android_room_sample.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
+
+import jp.co.optim.techblog_android_room_sample.R;
+import jp.co.optim.techblog_android_room_sample.UserDataManager;
+import jp.co.optim.techblog_android_room_sample.UserDataManagerCallback;
+import jp.co.optim.techblog_android_room_sample.db.User;
+
 public class MainActivity extends AppCompatActivity {
     private UserDataManager userDataManager;
     private UserDataManagerCallback callback;
+    private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +30,28 @@ public class MainActivity extends AppCompatActivity {
         //toolbarを設定
         Toolbar toolbar = findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
-        //dbを設定
+
+        initDb();
+        initRecyclerView();
+    }
+
+    /**
+     * dbを設定。
+     */
+    private void initDb() {
         userDataManager = new UserDataManager(this);
-        callback = new UserDataManagerCallback();
+        callback = new UserDataManagerCallback(this);
         userDataManager.setCallback(callback);
+    }
+
+    /**
+     * RecyclerViewを設定。
+     */
+    private void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewUserList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new UserListAdapter();
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -44,5 +72,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickAddUserButton(View view) {
+    }
+
+    /**
+     * DB読み込み完了後、RecyclerViewを更新する。
+     *
+     * @param allUser dbから取得したUserデータ
+     */
+    public void updateRecyclerView(List<User> allUser) {
+        if (adapter instanceof UserListAdapter) {
+            ((UserListAdapter) adapter).setUsers(allUser);
+        }
     }
 }
