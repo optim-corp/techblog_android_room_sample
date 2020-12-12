@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    private UserDataManager userDataManager;
+    private UserDataManagerCallback callback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         //toolbarを設定
         Toolbar toolbar = findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
+        //dbを設定
+        userDataManager = new UserDataManager(this);
+        callback = new UserDataManagerCallback();
+        userDataManager.setCallback(callback);
     }
 
     @Override
@@ -35,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     public void onClickAddUserButton(View view) {
