@@ -17,5 +17,6 @@
         android:id="@+id/listUserCreatedAt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="viewEnd" />
+        android:textAlignment="viewEnd"
+        android:textColor="@color/colorContent" />
 </LinearLayout>
