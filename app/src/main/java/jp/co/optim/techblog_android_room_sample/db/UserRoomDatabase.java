@@ -13,7 +13,7 @@ import androidx.room.RoomDatabase;
 public abstract class UserRoomDatabase extends RoomDatabase {
 
     /**
-     * db操作に使用するDAOの抽象メソッド。
+     * DB操作に使用するDAOの抽象メソッド。
      *
      * @return UserDaoのオブジェクト。
      */
@@ -31,7 +31,7 @@ public abstract class UserRoomDatabase extends RoomDatabase {
         if (userRoomDatabase == null) {
             synchronized (UserRoomDatabase.class) {
                 if (userRoomDatabase == null) {
-                    //dbを作成する。
+                    //DBを作成する。
                     userRoomDatabase = Room.databaseBuilder(context.getApplicationContext(),
                             UserRoomDatabase.class, "user_database")
                             .build();
@@ -42,7 +42,7 @@ public abstract class UserRoomDatabase extends RoomDatabase {
     }
 
     /**
-     * dbを閉じる。
+     * DBを閉じる。
      */
     public void closeDatabase() {
         if (userRoomDatabase.isOpen()) {

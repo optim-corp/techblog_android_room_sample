@@ -8,7 +8,7 @@ import jp.co.optim.techblog_android_room_sample.db.User;
 import jp.co.optim.techblog_android_room_sample.view.MainActivity;
 
 /**
- * db処理完了通知を受け、次の処理を開始するcallbackクラス。
+ * DB処理完了通知を受け、次の処理を開始するcallbackクラス。
  */
 public class UserDataManagerCallback {
     private MainActivity activity;

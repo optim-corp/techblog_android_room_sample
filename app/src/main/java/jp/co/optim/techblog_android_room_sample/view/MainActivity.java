@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * dbを設定。
+     * DBを設定。
      */
     private void initDb() {
         userDataManager = new UserDataManager(this);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         if (inputName.length() != 0) {
-            //db格納用に整形
+            //DB格納用に整形
             User user = new User();
             user.setName(inputName);
             user.setCreatedAt(System.currentTimeMillis());
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * DB読み込み完了後、RecyclerViewを更新する。
      *
-     * @param allUser dbから取得したUserデータ
+     * @param allUser DBから取得したUserデータ
      */
     public void updateRecyclerView(List<User> allUser) {
         if (adapter instanceof UserListAdapter) {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        //Activity破棄のタイミングで、dbを閉じる。
+        //Activity破棄のタイミングで、DBを閉じる。
         userDataManager.closeDatabase();
         super.onDestroy();
     }

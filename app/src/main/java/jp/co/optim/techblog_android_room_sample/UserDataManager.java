@@ -114,13 +114,13 @@ public class UserDataManager {
     }
 
     /**
-     * 非同期でdb読み込みを行う。
+     * 非同期でDB読み込みを行う。
      *
      * @return 読み込み結果
      */
     @UiThread
     private void asyncRead() {
-        //ワーカースレッドからdb読み込み結果を受け取る。
+        //ワーカースレッドからDB読み込み結果を受け取る。
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -199,7 +199,7 @@ public class UserDataManager {
     }
 
     /**
-     * dbを閉じる。
+     * DBを閉じる。
      */
     public void closeDatabase() {
         db.closeDatabase();
