@@ -6,7 +6,7 @@
 
 ## 開発環境
 
-* Android 3.6.3
+* Android Studio 3.6.3
 
 ## 動作環境
 
