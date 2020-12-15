@@ -103,4 +103,11 @@ public class MainActivity extends AppCompatActivity {
             ((UserListAdapter) adapter).setUsers(allUser);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        //Activity破棄のタイミングで、dbを閉じる。
+        userDataManager.closeDatabase();
+        super.onDestroy();
+    }
 }

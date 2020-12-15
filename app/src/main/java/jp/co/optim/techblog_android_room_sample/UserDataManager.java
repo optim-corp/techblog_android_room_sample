@@ -28,6 +28,7 @@ public class UserDataManager {
     private static final int DELETE_ALL = 102;
 
     private UserDao userDao;
+    private UserRoomDatabase db;
 
     /**
      * 全ユーザーのデータを格納するList型オブジェクト。
@@ -50,7 +51,7 @@ public class UserDataManager {
      * @param context Application Context
      */
     public UserDataManager(Context context) {
-        UserRoomDatabase db = UserRoomDatabase.getDatabase(context);
+        db = UserRoomDatabase.getDatabase(context);
         userDao = db.UserDao();
     }
 
@@ -195,5 +196,12 @@ public class UserDataManager {
             user = userDao.loadUsers();
             handler.sendMessage(handler.obtainMessage(READ, user));
         }
+    }
+
+    /**
+     * dbを閉じる。
+     */
+    public void closeDatabase() {
+        db.closeDatabase();
     }
 }

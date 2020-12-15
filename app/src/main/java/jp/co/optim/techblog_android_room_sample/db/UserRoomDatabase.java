@@ -40,4 +40,14 @@ public abstract class UserRoomDatabase extends RoomDatabase {
         }
         return userRoomDatabase;
     }
+
+    /**
+     * dbを閉じる。
+     */
+    public void closeDatabase() {
+        if (userRoomDatabase.isOpen()) {
+            userRoomDatabase.close();
+        }
+        userRoomDatabase = null;
+    }
 }
